@@ -12,6 +12,7 @@
 @interface ViewController () <UITableViewDataSource>
 
 @property (nonatomic, strong) NSArray *heroes;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -44,6 +45,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    self.tableView.tableHeaderView = [UIButton buttonWithType:UIButtonTypeContactAdd];
+    self.tableView.tableFooterView = [UIButton buttonWithType:UIButtonTypeInfoDark];
 }
 
 #pragma mark ————— UITableViewDataSource —————
@@ -52,7 +56,7 @@
  */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 3;
 }
 
 /**
@@ -78,6 +82,47 @@
     
     return cell;
 }
+
+/**
+ 每个分区的头部标题
+ */
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSString *headerTitle = @"头部标题";
+    
+    return headerTitle;
+}
+
+/**
+ 每个分区的尾部标题
+ */
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+    NSString *footerTitle = @"尾部标题";
+    
+    return footerTitle;
+}
+
+#pragma mark ————— UITableViewDelegate —————
+/**
+ 每个分区的头部视图
+ */
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    UIImageView *sectionHeaderImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"scenery"]];
+//
+//    return sectionHeaderImageView;
+//}
+
+/**
+ 每个分区的尾部视图
+ */
+//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+//{
+//    UIImageView *sectionFooterImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"timg"]];
+//    
+//    return sectionFooterImageView;
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
